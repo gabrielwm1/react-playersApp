@@ -1,12 +1,54 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React, { Component } from "react";
+import ReactDOM from "react-dom";
+import CommentDetail from "./CommentDetail";
+import AddPlayerForm from "./AddPlayerForm";
 
-ReactDOM.render(<App />, document.getElementById('root'));
+class App extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            players: [
+                {
+                    name: "gabe",
+                    id: 1
+                },
+                {
+                    name: "Melisa",
+                    id: 2
+                }
+            ]
+        };
+    }
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+    handleAddPlayer = name => {
+        // let { prevPlayerId } = this.state;
+        this.setState(prevState => {
+            return {
+                players: [
+                    ...prevState.players,
+                    {
+                        name,
+                        score: 0,
+                        id: (this.prevPlayerId += 1)
+                    }
+                ]
+            };
+        });
+    };
+
+    render() {
+        return (
+            <div className="ui container comments">
+                {this.state.players.map(player => (
+                    <CommentDetail
+                        name={player.name}
+                        key={player.id.toString()}
+                    />
+                ))}
+                <AddPlayerForm addPlayer={this.handleAddPlayer} />
+            </div>
+        );
+    }
+}
+
+ReactDOM.render(<App />, document.querySelector("#root"));
