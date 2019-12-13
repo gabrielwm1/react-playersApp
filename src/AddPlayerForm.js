@@ -1,16 +1,37 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 class AddPlayerForm extends Component {
-    static propTypes = {
-        addPlayer: PropTypes.func
-    };
-    playerInput = React.createRef();
 
-    handleSubmit = e => {
+    constructor(props) {
+        super(props);
+        this.state = {value: ''};
+
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+      }
+    // static propTypes = {
+    //     addPlayer: PropTypes.func
+    // };
+    // playerInput = React.createRef();
+    handleChange(event) {
+        this.setState({value: event.target.value});
+    }
+
+    handleSubmit(event) {
+        // alert('A name was submitted: ' + this.state.value);
+        event.preventDefault();
+        this.props.addPlayer(this.state.value);
+        this.setState({value: ""});
         console.log("test");
-        this.props.addName(this.playerInput.current.value);
-        e.currentTarget.reset();
-    };
+      }
+    // handleSubmit = () => {
+    //     console.log("test");
+    
+    //     // console.log(this.playerInput.current.value);
+    //     // console.log(this.props);
+    //     // console.log(e);
+    //     // e.currentTarget.reset();
+    // };
 
     render() {
         return (
@@ -19,7 +40,7 @@ class AddPlayerForm extends Component {
                     <div className="fields">
                         <div className="field">
                             <label>First name</label>
-                            <input type="text" placeholder="First name"></input>
+                            <input type="text" value={this.state.value} onChange={this.handleChange}></input>
                             <button className="ui button" type="submit">
                                 Submit
                             </button>

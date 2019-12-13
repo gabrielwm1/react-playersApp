@@ -2,6 +2,7 @@ import React from "react";
 
 const CommentDetail = props => {
     // console.log(props);
+    console.log(props);
     return (
         <div className="comment">
             <a href="/" className="avatar">
@@ -14,7 +15,7 @@ const CommentDetail = props => {
                 <div className="metadata">
                     <span className="date">Today at 7pm</span>
                 </div>
-                <div className="text">Nice blog post</div>
+                <div className="text">Hey cool post!</div>
             </div>
         </div>
     );

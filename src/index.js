@@ -9,18 +9,17 @@ class App extends Component {
         this.state = {
             players: [
                 {
-                    name: "gabe",
-                    id: 1
+                    name: "gabe"
                 },
                 {
-                    name: "Melisa",
-                    id: 2
+                    name: "Melisa"
                 }
             ]
         };
     }
 
     handleAddPlayer = name => {
+       console.log(name)
         // let { prevPlayerId } = this.state;
         this.setState(prevState => {
             return {
@@ -28,8 +27,6 @@ class App extends Component {
                     ...prevState.players,
                     {
                         name,
-                        score: 0,
-                        id: (this.prevPlayerId += 1)
                     }
                 ]
             };
@@ -42,9 +39,10 @@ class App extends Component {
                 {this.state.players.map(player => (
                     <CommentDetail
                         name={player.name}
-                        key={player.id.toString()}
+                        key={player.name}
                     />
                 ))}
+                
                 <AddPlayerForm addPlayer={this.handleAddPlayer} />
             </div>
         );
